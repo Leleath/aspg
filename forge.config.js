@@ -17,21 +17,18 @@ module.exports = {
         name: 'aspg'
       }
     },
-    // {
-    //   name: '@electron-forge/maker-zip',
-    //   platforms: ['win32'],
-    //   config: {
-    //     name: 'aspg'
-    //   }
-    // },
-    // {
-    //   name: '@electron-forge/maker-deb',
-    //   config: {},
-    // },
-    // {
-    //   name: '@electron-forge/maker-rpm',
-    //   config: {},
-    // },
+    {
+      name: '@electron-forge/maker-zip',
+      config: {}
+    },
+    {
+      name: '@electron-forge/maker-deb',
+      config: {},
+    },
+    {
+      name: '@electron-forge/maker-rpm',
+      config: {},
+    },
   ],
   publishers: [
     {
@@ -43,7 +40,7 @@ module.exports = {
         },
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
-        draft: false
+        draft: true
       }
     }
   ],

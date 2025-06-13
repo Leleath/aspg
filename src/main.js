@@ -1,8 +1,13 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 
-const { updateElectronApp } = require('update-electron-app')
-updateElectronApp()
+const { updateElectronApp, UpdateSourceType } = require('update-electron-app')
+updateElectronApp({
+  updateSource: {
+    type: UpdateSourceType.ElectronPublicUpdateService,
+    repo: 'Leleath/aspg'
+  }
+})
 
 import Generator from './generator';
 
