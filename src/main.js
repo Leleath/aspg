@@ -21,7 +21,17 @@ const createWindow = () => {
     },
   });
 
+  mainWindow.setMenu(null)
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+
+  const generator = new Generator(mainWindow);
+
+  ipcMain.handle('generate', (event, settings) => {
+    return generator.gen(settings);
+  });
+  ipcMain.handle('open-folder', (event, settings) => {
+    return generator.openFolder();
+  });
 
   // mainWindow.webContents.openDevTools();
 };
@@ -33,15 +43,6 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
-  });
-
-  const generator = new Generator(mainWindow);
-
-  ipcMain.handle('generate', (event, settings) => {
-    return generator.gen(settings);
-  });
-  ipcMain.handle('open-folder', (event, settings) => {
-    return generator.openFolder();
   });
 });
 
