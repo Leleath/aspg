@@ -1,8 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 
-const { updateElectronApp } = require('update-electron-app');
-updateElectronApp();
+const { updateElectronApp } = require('update-electron-app')
+updateElectronApp()
 
 import Generator from './generator';
 
