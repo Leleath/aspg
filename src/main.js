@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 
-require('update-electron-app')()
+const { updateElectronApp } = require('update-electron-app');
+updateElectronApp();
 
 import Generator from './generator';
 
@@ -22,16 +23,7 @@ const createWindow = () => {
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  const generator = new Generator(mainWindow);
-
-  ipcMain.handle('generate', (event, settings) => {
-    return generator.gen(settings);
-  });
-  ipcMain.handle('open-folder', (event, settings) => {
-    return generator.openFolder();
-  });
-
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 app.whenReady().then(() => {
@@ -41,6 +33,15 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
+  });
+
+  const generator = new Generator(mainWindow);
+
+  ipcMain.handle('generate', (event, settings) => {
+    return generator.gen(settings);
+  });
+  ipcMain.handle('open-folder', (event, settings) => {
+    return generator.openFolder();
   });
 });
 
