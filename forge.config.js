@@ -14,21 +14,22 @@ module.exports = {
       name: '@electron-forge/maker-squirrel',
       platforms: ['win32'],
       config: {
-        name: 'aspg'
+        name: 'aspg',
+        remoteReleases: 'https://github.com/Leleath/aspg/releases'
       }
     },
-    {
-      name: '@electron-forge/maker-zip',
-      config: {}
-    },
-    {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },
+    // {
+    //   name: '@electron-forge/maker-zip',
+    //   config: {}
+    // },
+    // {
+    //   name: '@electron-forge/maker-deb',
+    //   config: {},
+    // },
+    // {
+    //   name: '@electron-forge/maker-rpm',
+    //   config: {},
+    // },
   ],
   publishers: [
     {
