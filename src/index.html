@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+
+    <style>
+        .hide {
+            display: none;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .range-slider input[type="range"] {
+            position: absolute;
+            pointer-events: none;
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        .range-slider input[type="range"]::-webkit-slider-thumb {
+            pointer-events: all;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0d6efd;
+            cursor: pointer;
+            margin-top: -8px;
+        }
+
+        .range-slider .slider-track {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: #ddd;
+            top: 50%;
+            border-radius: 5px;
+        }
+
+        .range-slider .slider-range {
+            position: absolute;
+            height: 5px;
+            background: #0d6efd;
+            top: 50%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body data-bs-theme="dark" class="h-100">
+    <div class="p-2 h-100 d-flex flex-column">
+        <h1 class="display-6 text-center">Anime Songs Pack Generator
+            <small class="text-body-secondary">v0.0.1</small>
+        </h1>
+
+        <div id="settingsPage" class="flex-grow-1">
+            <form id="settingsForm" class="h-100 d-flex flex-column">
+                <div class="flex-grow-1 h-100">
+                    <nav class="mb-2">
+                        <div class="nav nav-pills d-flex justify-content-center gap-2" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-pack-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-pack" type="button" role="tab" aria-controls="nav-pack"
+                                aria-selected="true">Pack</button>
+                            <button class="nav-link" id="nav-lists-tab" data-bs-toggle="tab" data-bs-target="#nav-lists"
+                                type="button" role="tab" aria-controls="nav-lists" aria-selected="false">Lists</button>
+                            <button class="nav-link" id="nav-songs-tab" data-bs-toggle="tab" data-bs-target="#nav-songs"
+                                type="button" role="tab" aria-controls="nav-songs" aria-selected="false">Songs</button>
+                            <button class="nav-link" id="nav-anime-tab" data-bs-toggle="tab" data-bs-target="#nav-anime"
+                                type="button" role="tab" aria-controls="nav-anime" aria-selected="false">Anime</button>
+                            <button class="nav-link" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                                type="button" role="tab" aria-controls="nav-about" aria-selected="false">About</button>
+                        </div>
+                    </nav>
+
+                    <div class="tab-content mb-2" id="nav-tabContent">
+                        <div class="tab-pane show active" id="nav-pack" role="tabpanel" aria-labelledby="nav-pack-tab"
+                            tabindex="0">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pack</h5>
+
+                                    <div class="mb-2">
+                                        <label for="packTitleInput" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="packTitleInput"
+                                            placeholder="Generated Songs Anime Pack..."
+                                            value="Generated Songs Anime Pack">
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="packRoundsInput" class="form-label">Rounds</label>
+                                                <input type="number" min="1" max="5" class="form-control w-100"
+                                                    id="packRoundsInput" value="1">
+                                            </div>
+                                            <div class="col">
+                                                <label for="packThemesInput" class="form-label">Themes</label>
+                                                <input type="number" min="1" max="9" class="form-control w-100"
+                                                    id="packThemesInput" value="2">
+                                            </div>
+                                            <div class="col">
+                                                <label for="packQuestionsInput" class="form-label">Questions</label>
+                                                <input type="number" min="1" max="9" class="form-control w-100"
+                                                    id="packQuestionsInput" value="3">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <label for="packThemesTitleInput" class="form-label">Themes Title</label>
+                                        <input type="text" class="form-control" id="packThemesTitleInput"
+                                            placeholder="Can be blank" value="SONGS ONLY">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="nav-lists" role="tabpanel" aria-labelledby="nav-lists-tab"
+                            tabindex="0">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lists</h5>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" value="" id="checkRandomSwitch"
+                                            switch checked>
+                                        <label class="form-check-label" for="checkRandomSwitch">
+                                            Random
+                                        </label>
+                                    </div>
+
+                                    <div id="userLists" class="hide">
+                                        <div id="listsCards"></div>
+
+                                        <button id="addListButton" type="button" class="btn btn-success w-100">Add
+                                            List</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="nav-songs" role="tabpanel" aria-labelledby="nav-songs-tab"
+                            tabindex="0">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Songs</h5>
+
+                                    <div class="mb-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="packOpeningsInput" class="form-label">Openings</label>
+                                                <input type="number" min="0" max="200" class="form-control w-100"
+                                                    id="packOpeningsInput" value="2">
+                                            </div>
+                                            <div class="col">
+                                                <label for="packEndingsInput" class="form-label">Endings</label>
+                                                <input type="number" min="0" max="200" class="form-control w-100"
+                                                    id="packEndingsInput" value="2">
+                                            </div>
+                                            <div class="col">
+                                                <label for="packInsertsInput" class="form-label">Inserts</label>
+                                                <input type="number" min="0" max="200" class="form-control w-100"
+                                                    id="packInsertsInput" value="2">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <label class="form-label">Difficulty</label>
+                                        <div class="range-slider position-relative mb-3">
+                                            <div class="slider-track"></div>
+                                            <div class="slider-range" id="slider-range"></div>
+                                            <input type="range" min="0" max="100" value="60"
+                                                id="songsDifficultyMinSlider" class="position-absolute z-2 w-100">
+                                            <input type="range" min="0" max="100" value="100"
+                                                id="songsDifficultyMaxSlider" class="position-absolute z-2 w-100">
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span id="min-value">60</span>
+                                            <span id="max-value">100</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 d-flex justify-content-between gap-2">
+
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="duplicateShowsCheck"
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-secondary" for="duplicateShowsCheck">Duplicate
+                                                Shows</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="duplicateFranchiseCheck"
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-secondary"
+                                                for="duplicateFranchiseCheck">Duplicate
+                                                Franchise</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="rebroadcastSongsCheck" checked
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-secondary"
+                                                for="rebroadcastSongsCheck">Rebroadcast
+                                                Songs</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="dubSongsCheck"
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-secondary" for="dubSongsCheck">Dub
+                                                Songs</label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="nav-anime" role="tabpanel" aria-labelledby="nav-anime-tab"
+                            tabindex="0">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Anime</h5>
+
+                                    <label class="w-100 mb-2">Anime Kind</label>
+                                    <div class="mb-2 d-flex justify-content-between gap-2">
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="statusTVCheck"
+                                                autocomplete="off" checked>
+                                            <label class="btn btn-outline-secondary" for="statusTVCheck">TV</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="statusMovieCheck"
+                                                autocomplete="off" checked>
+                                            <label class="btn btn-outline-secondary"
+                                                for="statusMovieCheck">Movie</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="statusOVACheck" checked
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-secondary" for="statusOVACheck">OVA</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="statusONACheck" checked
+                                                autocomplete="off">
+                                            <label class="btn btn-outline-secondary" for="statusONACheck">ONA</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="btn-check" id="statusSpecialCheck"
+                                                autocomplete="off" checked>
+                                            <label class="btn btn-outline-secondary"
+                                                for="statusSpecialCheck">Special</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab"
+                            tabindex="0">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">About</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the
+                                        bulk
+                                        of
+                                        the
+                                        card’s
+                                        content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success w-100" id="generateButton">Generate</button>
+            </form>
+        </div>
+        <div id="logPage" class="flex-grow-1 hide">
+            <div class="d-flex flex-column gap-2 h-100">
+                <textarea id="logTextarea" class="form-control textarea w-100 h-100 d-inline-block" readonly></textarea>
+                <div class="hide" id="logMenu">
+                    <div class="d-flex flex-column gap-2">
+                        <button type="button" class="btn btn-success w-100" id="openBuildsFolderButton">Открыть папку с
+                            паком</button>
+                        <button type="button" class="btn btn-success w-100" id="backToSettingsButton">Вернуться</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="userCardTemplate" type="text/template">
+        <div class="card mb-2 user-card">
+            <div class="card-body">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control list-username"
+                        aria-label="Text input with segmented dropdown button" required>
+                    <select class="form-select list-source">
+                        <option value="myanimelist" selected>MyAnimeList</option>
+                        <option value="shikimori">Shikimori</option>
+                        <!-- <option value="anilist">Anilist</option> -->
+                    </select>
+                    <button class="btn btn-outline-secondary remove-list-button" type="button">Remove</button>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <input type="checkbox" class="btn-check check-plan-to-watch-input"
+                        autocomplete="off">
+                    <label class="btn btn-outline-secondary check-plan-to-watch-label">Plan to
+                        Watch</label>
+
+                    <input type="checkbox" class="btn-check check-watching-input" checked
+                        autocomplete="off">
+                    <label class="btn btn-outline-secondary check-watching-label">Watching</label>
+
+                    <input type="checkbox" class="btn-check check-completed-input" checked
+                        autocomplete="off">
+                    <label class="btn btn-outline-secondary check-completed-label">Completed</label>
+
+                    <input type="checkbox" class="btn-check check-on-hold-input"
+                        autocomplete="off">
+                    <label class="btn btn-outline-secondary check-on-hold-label">On Hold</label>
+
+                    <input type="checkbox" class="btn-check check-dropped-input"
+                        autocomplete="off">
+                    <label class="btn btn-outline-secondary check-dropped-label">Dropped</label>
+                </div>
+            </div>
+        </div>
+    </script>
+</body>
+
+</html>
