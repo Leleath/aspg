@@ -296,6 +296,7 @@ function generatorLog(data) {
     switch (data.type) {
         case 'log':
             $("#logTextarea").val($("#logTextarea").val() + data.message + '\n');
+            $("#logTextarea").scrollTop($("#logTextarea")[0].scrollHeight);
             break;
 
         case 'startGenerator':

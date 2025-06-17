@@ -47,7 +47,7 @@ class GetSongs {
             this.settings.animes.kind[anime.kind.toLowerCase()],
             (anime.airedOn.year >= this.settings.animes.vintage.from && anime.airedOn.year <= this.settings.animes.vintage.to),
             (anime.score >= this.settings.animes.score.from && anime.score <= this.settings.animes.score.to),
-            (!hasExcludedGenre && (this.settings.animes.genresPartialMatch ? hasRequiredGenres : allRequiredGenres))
+            !(this.settings.animes.genres.length > 0 && !(!hasExcludedGenre && (this.settings.animes.genresPartialMatch ? hasRequiredGenres : allRequiredGenres)))
         ].every(Boolean)) return false;
 
         return true;
