@@ -11,5 +11,7 @@ module.exports = {
   externals: {
     // Always load `native-hello-world` via require
     "sharp": "commonjs2 sharp",
+    "jquery": 'jQuery',
+    "bootstrap": 'bootstrap'
   },
 };

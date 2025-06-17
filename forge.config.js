@@ -6,30 +6,20 @@ module.exports = {
   packagerConfig: {
     "asar": {
       "unpack": "**/node_modules/{sharp,@img}/**/*"
-    }
+    },
+    extraResource: [
+      './resources/ffmpeg'
+    ]
   },
   rebuildConfig: {},
   makers: [
     {
-      name: '@electron-forge/maker-squirrel',
+      name: '@electron-forge/maker-zip',
       platforms: ['win32'],
       config: {
-        name: 'aspg',
-        remoteReleases: 'https://github.com/Leleath/aspg/releases'
+        // the config can be an object
       }
-    },
-    // {
-    //   name: '@electron-forge/maker-zip',
-    //   config: {}
-    // },
-    // {
-    //   name: '@electron-forge/maker-deb',
-    //   config: {},
-    // },
-    // {
-    //   name: '@electron-forge/maker-rpm',
-    //   config: {},
-    // },
+    }
   ],
   publishers: [
     {

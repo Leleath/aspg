@@ -8,5 +8,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     openFolder: (param) => ipcRenderer.invoke('open-folder', param),
     generatorLog: (callback) => {
         ipcRenderer.on('generatorLog', (event, data) => callback(data));
-    }
+    },
+
+    getUpdate: (param) => ipcRenderer.invoke('getUpdate', param),
+    responseUpdate: (callback) => {
+        ipcRenderer.on('responseUpdate', (event, data) => callback(data));
+    },
+    openLink: (param) => ipcRenderer.invoke('openLink', param),
 });

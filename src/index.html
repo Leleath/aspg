@@ -53,9 +53,10 @@
 
 <body data-bs-theme="dark" class="h-100">
     <div class="p-2 h-100 d-flex flex-column">
-        <h1 class="display-6 text-center">Anime Songs Pack Generator
-            <small class="text-body-secondary">v0.1.6</small>
+        <h1 class="display-6 text-center mb-0">Anime Songs Pack Generator
+            <small class="text-body-secondary">v0.5</small>
         </h1>
+        <div class="form-text mb-2 text-center info-help">Генератор Паков по Сонгам из Аниме для SiGame</div>
 
         <div id="settingsPage" class="flex-grow-1">
             <form id="settingsForm" class="h-100 d-flex flex-column">
@@ -71,8 +72,8 @@
                                 type="button" role="tab" aria-controls="nav-songs" aria-selected="false">Songs</button>
                             <button class="nav-link" id="nav-anime-tab" data-bs-toggle="tab" data-bs-target="#nav-anime"
                                 type="button" role="tab" aria-controls="nav-anime" aria-selected="false">Anime</button>
-                            <button class="nav-link" id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
-                                type="button" role="tab" aria-controls="nav-about" aria-selected="false">About</button>
+                            <button class="nav-link" id="nav-other-tab" data-bs-toggle="tab" data-bs-target="#nav-other"
+                                type="button" role="tab" aria-controls="nav-other" aria-selected="false">Other</button>
                         </div>
                     </nav>
 
@@ -80,7 +81,7 @@
                         <div class="tab-pane show active" id="nav-pack" role="tabpanel" aria-labelledby="nav-pack-tab"
                             tabindex="0">
 
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-body">
                                     <h5 class="card-title">Pack</h5>
 
@@ -89,6 +90,8 @@
                                         <input type="text" class="form-control" id="packTitleInput"
                                             placeholder="Generated Songs Anime Pack..."
                                             value="Generated Songs Anime Pack">
+                                        <div class="form-text info-help">Название пакета и
+                                            названия тем роли не играют, можете оставить как есть.</div>
                                     </div>
 
                                     <div class="mb-2">
@@ -109,14 +112,17 @@
                                                     id="packQuestionsInput" value="6">
                                             </div>
                                         </div>
+                                        <div class="form-text info-help">Когда будете ставить
+                                            количество раундов, тем и вопросов - запомните их сумму,
+                                            это будет количество сонгов на пак.</div>
                                     </div>
 
-                                    <div class="mb-2">
+                                    <div>
                                         <label for="packThemesTitleInput" class="form-label">Themes Title</label>
                                         <input type="text" class="form-control" id="packThemesTitleInput"
                                             placeholder="Can be blank" value="SONGS ONLY">
+                                        <div class="form-text mb-2 info-help">Общее название тем.</div>
                                     </div>
-
                                 </div>
                             </div>
 
@@ -124,7 +130,7 @@
                         <div class="tab-pane" id="nav-lists" role="tabpanel" aria-labelledby="nav-lists-tab"
                             tabindex="0">
 
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-body">
                                     <h5 class="card-title">Lists</h5>
 
@@ -135,13 +141,42 @@
                                             Random
                                         </label>
                                     </div>
+                                    <div class="form-text info-help">Если Random активен, то сонги будут браться
+                                        напрямую с AMQ.</div>
 
                                     <div id="userLists" class="hide">
+                                        <div class="input-group flex-nowrap my-2">
+                                            <span class="input-group-text" id="addon-wrapping">Simillar</span>
+                                            <input type="number" min="2" class="form-control" placeholder="Count"
+                                                value="2" id="simillarCountInput">
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" type="checkbox" id="simillarCheck"
+                                                    checked>
+                                            </div>
+                                        </div>
+                                        <div class="form-text mb-2 info-help">При включённом Simillar будут отобраны
+                                            аниме, которые есть у указанного числа пользователей.</div>
+
                                         <div id="listsCards"></div>
 
-                                        <button id="addListButton" type="button" class="btn btn-success w-100">Add
+                                        <button id="addUserCardButton" type="button" class="btn btn-success w-100">Add
                                             List</button>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="card opacity-50">
+                                <div class="card-body">
+                                    <h5 class="card-title">Примечание</h5>
+
+                                    <p class="mb-2">
+                                        У Shikimori указывайте точный Ник (регистр учитывается), тк он ищет среди всех
+                                        пользователей и находит первого подходящего.
+                                    </p>
+                                    <p class="mb-2">
+                                        Не оставляйте список пользователей, поле ввода ника и список листов пустыми -
+                                        генератор будет работать по стандартным значениям.
+                                    </p>
                                 </div>
                             </div>
 
@@ -149,10 +184,9 @@
                         <div class="tab-pane" id="nav-songs" role="tabpanel" aria-labelledby="nav-songs-tab"
                             tabindex="0">
 
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-body">
                                     <h5 class="card-title">Songs</h5>
-
                                     <div class="mb-2">
                                         <div class="row">
                                             <div class="col">
@@ -171,10 +205,12 @@
                                                     id="packInsertsInput" value="16">
                                             </div>
                                         </div>
+                                        <div class="form-text mb-2 info-help">Нужно распределить еще <span
+                                                id="questionsLeft">0</span> сонгов.</div>
                                     </div>
 
                                     <div class="mb-2">
-                                        <label class="form-label">Difficulty</label>
+                                        <label class="form-label mb-3">Difficulty</label>
                                         <div class="range-slider position-relative mb-3">
                                             <div class="slider-track"></div>
                                             <div class="slider-range" id="slider-range"></div>
@@ -187,37 +223,55 @@
                                             <span id="min-value">0</span>
                                             <span id="max-value">100</span>
                                         </div>
+                                        <div class="form-text mb-2 info-help">Сложность относительно AMQ.</div>
                                     </div>
 
-                                    <div class="mb-2 d-flex justify-content-between gap-2">
+                                    <div class="mb-2">
+                                        <label class="form-label mb-2">Modifiers</label>
+                                        <div class="d-flex gap-2">
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="songsRebroadcastCheckbox"
+                                                    checked autocomplete="off">
+                                                <label class="btn btn-outline-secondary"
+                                                    for="songsRebroadcastCheckbox">Rebroadcast</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="songsDubCheckbox"
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary"
+                                                    for="songsDubCheckbox">Dub</label>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="duplicateShowsCheck"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="duplicateShowsCheck">Duplicate
-                                                Shows</label>
+                                    <div>
+                                        <label class="form-label mb-2">Categories</label>
+                                        <div class="d-flex gap-2">
+                                            <div>
+                                                <input type="checkbox" class="btn-check"
+                                                    id="songCategoryStandardCheckbox" autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary"
+                                                    for="songCategoryStandardCheckbox">Standard</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check"
+                                                    id="songCategoryInstrumentalCheckbox" autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary"
+                                                    for="songCategoryInstrumentalCheckbox">Instrumental</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check"
+                                                    id="songCategoryChantingCheckbox" autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary"
+                                                    for="songCategoryChantingCheckbox">Chanting</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check"
+                                                    id="songCategoryCharacterCheckbox" autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary"
+                                                    for="songCategoryCharacterCheckbox">Character</label>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="duplicateFranchiseCheck"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-secondary"
-                                                for="duplicateFranchiseCheck">Duplicate
-                                                Franchise</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="rebroadcastSongsCheck" checked
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-secondary"
-                                                for="rebroadcastSongsCheck">Rebroadcast
-                                                Songs</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="dubSongsCheck"
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="dubSongsCheck">Dub
-                                                Songs</label>
-                                        </div>
-
                                     </div>
 
                                 </div>
@@ -227,58 +281,169 @@
                         <div class="tab-pane" id="nav-anime" role="tabpanel" aria-labelledby="nav-anime-tab"
                             tabindex="0">
 
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-body">
                                     <h5 class="card-title">Anime</h5>
 
-                                    <label class="w-100 mb-2">Anime Kind</label>
-                                    <div class="mb-2 d-flex justify-content-between gap-2">
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="statusTVCheck"
-                                                autocomplete="off" checked>
-                                            <label class="btn btn-outline-secondary" for="statusTVCheck">TV</label>
+                                    <div class="mb-2">
+                                        <label class="w-100 mb-2">Rating</label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="animeScoreFromInput" class="form-label">From</label>
+                                                <input type="number" min="0" max="10" class="form-control w-100"
+                                                    id="animeScoreFromInput" value="0">
+                                            </div>
+                                            <div class="col">
+                                                <label for="animeScoreToInput" class="form-label">To</label>
+                                                <input type="number" min="0" max="10" class="form-control w-100"
+                                                    id="animeScoreToInput" value="10">
+                                            </div>
                                         </div>
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="statusMovieCheck"
-                                                autocomplete="off" checked>
-                                            <label class="btn btn-outline-secondary"
-                                                for="statusMovieCheck">Movie</label>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <label class="w-100 mb-2">Kind</label>
+                                        <div class="d-flex justify-content-between gap-2">
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="statusTVCheck"
+                                                    autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary" for="statusTVCheck">TV</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="statusMovieCheck"
+                                                    autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary"
+                                                    for="statusMovieCheck">Movie</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="statusOVACheck" checked
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary"
+                                                    for="statusOVACheck">OVA</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="statusONACheck" checked
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary"
+                                                    for="statusONACheck">ONA</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="statusSpecialCheck"
+                                                    autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary"
+                                                    for="statusSpecialCheck">Special</label>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="statusOVACheck" checked
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <label class="w-100 mb-2">Vintage</label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="animeVintageFromInput" class="form-label">From</label>
+                                                <input type="number" min="1944" max="2025" class="form-control w-100"
+                                                    id="animeVintageFromInput" value="1944">
+                                            </div>
+                                            <div class="col">
+                                                <label for="animeVintageToInput" class="form-label">To</label>
+                                                <input type="number" min="1944" max="2025" class="form-control w-100"
+                                                    id="animeVintageToInput" value="2025">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="w-100 mb-2">Genres</label>
+                                        <div class="mb-2">
+                                            <input type="checkbox" class="btn-check" id="genresPartialMatch" checked
                                                 autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="statusOVACheck">OVA</label>
+                                            <label class="btn btn-outline-secondary" for="genresPartialMatch">Partial
+                                                Match</label>
                                         </div>
                                         <div>
-                                            <input type="checkbox" class="btn-check" id="statusONACheck" checked
-                                                autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="statusONACheck">ONA</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" class="btn-check" id="statusSpecialCheck"
-                                                autocomplete="off" checked>
-                                            <label class="btn btn-outline-secondary"
-                                                for="statusSpecialCheck">Special</label>
+                                            <div class="form-text mb-2 info-help">Аниме с жанром отбираются, только если
+                                                он отмечен галочкой.</div>
+                                            <div id="genresLists" class="card">
+                                                <div class="card-body">
+                                                    <div id="genresCards" class="d-flex flex-column gap-2"></div>
+
+                                                    <button id="addGenreCardButton" type="button"
+                                                        class="btn btn-success w-100">Add
+                                                        Genre</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="tab-pane" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab"
+                        <div class="tab-pane" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab"
                             tabindex="0">
 
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-body">
-                                    <h5 class="card-title">About</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk
-                                        of
-                                        the
-                                        card’s
-                                        content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">Other</h5>
+
+                                    <div class="mb-2">
+                                        <label class="w-100 mb-2">Modifiers</label>
+                                        <div class="d-flex gap-2">
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="duplicateFranchiseCheck"
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary"
+                                                    for="duplicateFranchiseCheck">Duplicate
+                                                    Franchise</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="duplicateShowsCheck"
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary"
+                                                    for="duplicateShowsCheck">Duplicate
+                                                    Shows</label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="hintCheck"
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary" for="hintCheck">Song Type
+                                                    Hint</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <label for="animeRatingFromInput mb-2" class="form-label">Cut</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Song Cut</span>
+                                            <input type="number" min="5" max="30" value="20" class="form-control"
+                                                id="audioCut" aria-label="Text input with checkbox">
+                                        </div>
+                                        <div class="form-text mb-2 info-help">Количество секунд для обрезки сонгов.
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Images</span>
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" type="checkbox" id="imagesCheck"
+                                                    aria-label="Checkbox for following text input">
+                                            </div>
+                                            <input type="number" min="1" max="20" value="7" class="form-control"
+                                                id="imagesTimeInput" aria-label="Text input with checkbox">
+                                        </div>
+                                        <div class="form-text info-help">Добавляет скриншоты из аниме за указанное
+                                            количество секунд до конца сонга.</div>
+                                    </div>
+
+                                    <div>
+                                        <div class="d-flex gap-2">
+                                            <div>
+                                                <input type="checkbox" class="btn-check" id="asyncDownloadCheck"
+                                                    autocomplete="off" checked>
+                                                <label class="btn btn-outline-secondary" for="asyncDownloadCheck">Async
+                                                    Download</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-text info-help">Сонги скачиваются по ходу отбора.</div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -303,6 +468,26 @@
         </div>
     </div>
 
+    <div class="modal fade" id="newUpdateModal" tabindex="-1" aria-labelledby="newUpdateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="newUpdateModalLabel">Update</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>New Version Founded</p>
+                    <p id="newVersion"></p>
+                    <button type="button" class="btn btn-secondary" id="openGithub">Github</button>
+                    <button type="button" class="btn btn-success" id="openNewVersion">Download</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script id="userCardTemplate" type="text/template">
         <div class="card mb-2 user-card">
             <div class="card-body">
@@ -314,31 +499,117 @@
                         <option value="shikimori">Shikimori</option>
                         <!-- <option value="anilist">Anilist</option> -->
                     </select>
-                    <button class="btn btn-outline-secondary remove-list-button" type="button">Remove</button>
+                    <button class="btn btn-outline-secondary remove-card-button" type="button">Remove</button>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <input type="checkbox" class="btn-check check-plan-to-watch-input"
+                    <input type="checkbox" class="btn-check check-plan-to-watch-checkbox"
                         autocomplete="off">
                     <label class="btn btn-outline-secondary check-plan-to-watch-label">Plan to
                         Watch</label>
 
-                    <input type="checkbox" class="btn-check check-watching-input" checked
+                    <input type="checkbox" class="btn-check check-watching-checkbox" checked
                         autocomplete="off">
                     <label class="btn btn-outline-secondary check-watching-label">Watching</label>
 
-                    <input type="checkbox" class="btn-check check-completed-input" checked
+                    <input type="checkbox" class="btn-check check-completed-checkbox" checked
                         autocomplete="off">
                     <label class="btn btn-outline-secondary check-completed-label">Completed</label>
 
-                    <input type="checkbox" class="btn-check check-on-hold-input"
+                    <input type="checkbox" class="btn-check check-on-hold-checkbox"
                         autocomplete="off">
                     <label class="btn btn-outline-secondary check-on-hold-label">On Hold</label>
 
-                    <input type="checkbox" class="btn-check check-dropped-input"
+                    <input type="checkbox" class="btn-check check-dropped-checkbox"
                         autocomplete="off">
                     <label class="btn btn-outline-secondary check-dropped-label">Dropped</label>
                 </div>
             </div>
+        </div>
+    </script>
+
+    <script id="genreCardTemplate" type="text/template">
+        <div class="input-group mb-2 genre-card">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0 genre-include" type="checkbox" aria-label="Checkbox for following text input" checked>
+            </div>
+            <select class="form-select genre-name">
+                <option value="action" selected>Action</option>
+                <option value="adult cast">Adult Cast</option>
+                <option value="adventure">Adventure</option>
+                <option value="anthropomorphic">Anthropomorphic</option>
+                <option value="avant garde">Avant Garde</option>
+                <option value="award winning">Award Winning</option>
+                <option value="cgdct">CGDCT</option>
+                <option value="childcare">Childcare</option>
+                <option value="combat sports">Combat Sports</option>
+                <option value="comedy">Comedy</option>
+                <option value="crossdressing">Crossdressing</option>
+                <option value="delinquents">Delinquents</option>
+                <option value="detective">Detective</option>
+                <option value="drama">Drama</option>
+                <option value="ecchi">Ecchi</option>
+                <option value="educational">Educational</option>
+                <option value="erotica">Erotica</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="gag humor">Gag Humor</option>
+                <option value="gore">Gore</option>
+                <option value="gourmet">Gourmet</option>
+                <option value="harem">Harem</option>
+                <option value="high stakes game">High Stakes Game</option>
+                <option value="historical">Historical</option>
+                <option value="horror">Horror</option>
+                <option value="idols (female)">Idols (Female)</option>
+                <option value="idols (male)">Idols (Male)</option>
+                <option value="isekai">Isekai</option>
+                <option value="iyashikei">Iyashikei</option>
+                <option value="josei">Josei</option>
+                <option value="kids">Kids</option>
+                <option value="love polygon">Love Polygon</option>
+                <option value="love status quo">Love Status Quo</option>
+                <option value="magical sex shift">Magical Sex Shift</option>
+                <option value="mahou shoujo">Mahou Shoujo</option>
+                <option value="martial arts">Martial Arts</option>
+                <option value="mecha">Mecha</option>
+                <option value="medical">Medical</option>
+                <option value="military">Military</option>
+                <option value="music">Music</option>
+                <option value="mystery">Mystery</option>
+                <option value="mythology">Mythology</option>
+                <option value="organized crime">Organized Crime</option>
+                <option value="otaku culture">Otaku Culture</option>
+                <option value="parody">Parody</option>
+                <option value="performing arts">Performing Arts</option>
+                <option value="pets">Pets</option>
+                <option value="psychological">Psychological</option>
+                <option value="racing">Racing</option>
+                <option value="reincarnation">Reincarnation</option>
+                <option value="reverse harem">Reverse Harem</option>
+                <option value="romance">Romance</option>
+                <option value="samurai">Samurai</option>
+                <option value="school">School</option>
+                <option value="sci-fi">Sci-Fi</option>
+                <option value="seinen">Seinen</option>
+                <option value="shoujo">Shoujo</option>
+                <option value="shounen">Shounen</option>
+                <option value="showbiz">Showbiz</option>
+                <option value="slice of life">Slice of Life</option>
+                <option value="space">Space</option>
+                <option value="sports">Sports</option>
+                <option value="strategy game">Strategy Game</option>
+                <option value="super power">Super Power</option>
+                <option value="supernatural">Supernatural</option>
+                <option value="survival">Survival</option>
+                <option value="suspense">Suspense</option>
+                <option value="team sports">Team Sports</option>
+                <option value="time travel">Time Travel</option>
+                <option value="urban fantasy">Urban Fantasy</option>
+                <option value="vampire">Vampire</option>
+                <option value="video game">Video Game</option>
+                <option value="villainess">Villainess</option>
+                <option value="visual arts">Visual Arts</option>
+                <option value="workplace">Workplace</option>
+            </select>
+            <button class="btn btn-outline-secondary remove-card-button" type="button">Remove</button>
         </div>
     </script>
 </body>

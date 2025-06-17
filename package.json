@@ -1,7 +1,7 @@
 {
   "name": "aspg",
   "productName": "Anime Songs SiGame Pack Generator",
-  "version": "0.1.6",
+  "version": "0.5.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
@@ -39,15 +39,19 @@
     "@popperjs/core": "^2.11.8",
     "@timfish/forge-externals-plugin": "^0.2.1",
     "adm-zip": "^0.5.16",
-    "axios": "^1.9.0",
+    "axios": "^1.10.0",
     "bootstrap": "^5.3.6",
+    "compare-versions": "^6.1.1",
     "dotenv": "^16.5.0",
     "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.6.2",
     "fluent-ffmpeg": "^2.1.3",
     "jquery": "^3.7.1",
+    "limiter": "^3.0.0",
     "sharp": "^0.34.2",
     "update-electron-app": "^3.1.1",
     "uuid": "^11.1.0",
+    "winston": "^3.17.0",
     "xml2js": "^0.6.2"
   },
   "bugs": {
